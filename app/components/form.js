@@ -1,28 +1,42 @@
 "use client";
 
 import React from "react";
+import { useState } from "react";
 
-const Form = () => {
-  const [formData, setFormData] = React.useState({
-    region: "us",
-    realm: "atiesh",
-    characterName: "whisperz",
-    namespace: "profile-classic-us",
-    locale: "en_US",
-  });
+const Form = ({ onSearch }) => {
+  const [region, setRegion] = useState("us");
+  const [realm, setRealm] = useState("atiesh");
+  const [name, setName] = useState("whisperz");
+  const [namespace, setNamespace] = useState("profile-classic-us");
+  const [locale, setLocale] = useState("en_US");
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleRegionChange = (event) => {
+    setRegion(event.target.value);
   };
-  const handleSubmit = async (event) => {
+  const handleRealmChange = (event) => {
+    setRealm(event.target.value);
+  };
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+  const handleNamespaceChange = (event) => {
+    setNamespace(event.target.value);
+  };
+  const handleLocaleChange = (event) => {
+    setLocale(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    // send formData to API
-    //console.log(formData);
+    const character = {
+      region,
+      realm,
+      name,
+      namespace,
+      locale,
+    };
+    onSearch(character);
   };
 
   return (
@@ -36,8 +50,8 @@ const Form = () => {
           <span className="text-orange-400">Region:</span>
           <select
             name="region"
-            value={formData.region}
-            onChange={handleChange}
+            value={region}
+            onChange={handleRegionChange}
             className="mt-1 p-2 w-full border rounded-md text-black"
           >
             <option value="us">US</option>
@@ -52,8 +66,8 @@ const Form = () => {
           <input
             type="text"
             name="realm"
-            value={formData.realm}
-            onChange={handleChange}
+            value={realm}
+            onChange={handleRealmChange}
             className="mt-1 p-2 w-full border rounded-md text-black"
           />
         </label>
@@ -62,9 +76,9 @@ const Form = () => {
           <span className="text-orange-400">Character Name:</span>
           <input
             type="text"
-            name="characterName"
-            value={formData.characterName}
-            onChange={handleChange}
+            name="name"
+            value={name}
+            onChange={handleNameChange}
             className="mt-1 p-2 w-full border rounded-md text-black"
           />
         </label>
@@ -74,8 +88,8 @@ const Form = () => {
           <input
             type="text"
             name="namespace"
-            value={formData.namespace}
-            onChange={handleChange}
+            value={namespace}
+            onChange={handleNamespaceChange}
             className="mt-1 p-2 w-full border rounded-md text-black"
           />
         </label>
@@ -85,8 +99,8 @@ const Form = () => {
           <input
             type="text"
             name="locale"
-            value={formData.locale}
-            onChange={handleChange}
+            value={locale}
+            onChange={handleLocaleChange}
             className="mt-1 p-2 w-full border rounded-md text-black"
           />
         </label>
