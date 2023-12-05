@@ -5,12 +5,12 @@
 import { useState, useEffect } from "react";
 import Tooltip from "./components/tooltip";
 import Armory from "./components/armory";
-import Form from "./components/form";
+import { refreshToken } from "./refreshToken";
 
 export async function fetchCharacter(formData) {
-  const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
-
-  //console.log(formData);
+  const accessToken = await refreshToken();
+  if (!accessToken) return null;
+  console.log(accessToken);
 
   const region = formData.region;
   const realm = formData.realm;
@@ -79,6 +79,9 @@ export default function API({ formData }) {
       ) : (
         <div>
           <p>loading...</p>
+          <button className="bg-blue-500" onClick={refreshToken}>
+            Refresh Token
+          </button>
         </div>
       )}
     </div>

@@ -4,7 +4,6 @@ import { useState } from "react";
 
 import API from "./api";
 import Form from "./components/form";
-import Armory from "./components/armory";
 
 export default function Home() {
   const [formData, setFormData] = useState({
