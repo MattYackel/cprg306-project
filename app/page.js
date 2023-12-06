@@ -13,7 +13,6 @@ export default function Home() {
     namespace: "profile-classic-us",
     locale: "en_US",
   });
-  //const [characterData, setCharacterData] = useState();
   const handleSubmit = (formData) => {
     console.log(formData);
     setFormData(formData);

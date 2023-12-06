@@ -1,7 +1,5 @@
 "use client";
 
-// curl -u {client_id}:{client_secret} -d grant_type=client_credentials https://oauth.battle.net/token
-
 import { useState, useEffect } from "react";
 import Tooltip from "./components/tooltip";
 import Armory from "./components/armory";
@@ -10,7 +8,6 @@ import { refreshToken } from "./refreshToken";
 export async function fetchCharacter(formData) {
   const accessToken = await refreshToken();
   if (!accessToken) return null;
-  console.log(accessToken);
 
   const region = formData.region;
   const realm = formData.realm;
@@ -33,19 +30,7 @@ export async function fetchCharacter(formData) {
   if (!character || character.code === 404) return null;
   if (character.equipment) {
     character.equipment = await fetchMore(character.equipment.href);
-    for (const item of character.equipment.equipped_items) {
-      item.media = await fetchMore(item.media.key.href);
-    }
   }
-  // if (character.guild) {
-  //   character.guild = await fetchMore(character.guild.key.href);
-  // }
-  // if (character.specializations) {
-  //   character.specializations = await fetchMore(character.specializations.href);
-  // }
-  // if (character.achievements) {
-  //   character.achievements = await fetchMore(character.achievements.href);
-  // }
   character.media = await fetchMore(character.media.href);
 
   return character;
@@ -57,7 +42,6 @@ export default function API({ formData }) {
   async function loadData() {
     try {
       const character = await fetchCharacter(formData);
-      console.log(character);
       setCharacter(character);
     } catch (error) {
       console.log(error);

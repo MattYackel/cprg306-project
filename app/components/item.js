@@ -5,7 +5,6 @@ export default function Item({ item }) {
   const [showTooltip, setShowToolTip] = React.useState(false);
   const [image, setImage] = React.useState("");
   const itemUrl = `https://www.wowhead.com/wotlk/item=${item.media.id}/${item.name}`;
-  console.log(formData);
 
   const handleMouseEnter = () => {
     setShowToolTip(true);
@@ -24,7 +23,6 @@ export default function Item({ item }) {
           const url = `${href}&locale=${locale}&access_token=${access_token}`;
           return fetch(url).then((response) => response.json());
         };
-
         const itemMedia = await fetchIcon(item.media.key.href);
         const [asset] = itemMedia.assets;
         const itemImageUrl = asset.value;
