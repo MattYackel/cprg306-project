@@ -17,23 +17,3 @@ const refreshToken = async () => {
   return data.access_token;
 };
 export { refreshToken };
-
-// Example Response
-/*
-{access_token: 'USkpKkJgQtyNM4vtAAy0tDmdj6dP5hA9Wj', token_type: 'bearer', expires_in: 86399, sub: '76f3d782a8ef4a4886c8a2e1d80b2eda'}
-access_token
-: 
-"USkpKkJgQtyNM4vtAAy0tDmdj6dP5hA9Wj"
-expires_in
-: 
-86399
-sub
-: 
-"76f3d782a8ef4a4886c8a2e1d80b2eda"
-token_type
-: 
-"bearer"
-[[Prototype]]
-: 
-Object
-*/

@@ -1,48 +1,36 @@
 import Item from "./item";
 
 export default function Armory({ character }) {
-  // Class Color
-  let classColor = "text-white";
-  if (character && character.character_class) {
-    switch (character.character_class.name) {
-      case "Death Knight":
-        classColor = "text-red-600";
-        break;
-      case "Priest":
-        classColor = "text-white";
-        break;
-      case "Mage":
-        classColor = "text-blue-300";
-        break;
-      case "Warrior":
-        classColor = "text-yellow-800";
-        break;
-      case "Paladin":
-        classColor = "text-pink-500";
-        break;
-      case "Shaman":
-        classColor = "text-blue-700";
-        break;
-      case "Druid":
-        classColor = "text-yellow-600";
-        break;
-      case "Rogue":
-        classColor = "text-yellow-300";
-        break;
-      case "Hunter":
-        classColor = "text-green-600";
-        break;
-      case "Warlock":
-        classColor = "text-purple-600";
-        break;
-    }
-  }
+  const classColors = {
+    "Death Knight": "text-red-600",
+    Priest: "text-white",
+    Mage: "text-blue-300",
+    Warrior: "text-yellow-800",
+    Paladin: "text-pink-500",
+    Shaman: "text-blue-700",
+    Druid: "text-yellow-600",
+    Rogue: "text-yellow-300",
+    Hunter: "text-green-600",
+    Warlock: "text-purple-600",
+  };
+  const classColor = classColors[character?.character_class?.name];
+
+  const renderItems = (inventoryType) => {
+    return (
+      <Item
+        item={character?.equipment?.equipped_items.find(
+          (item) => item && item.slot.type === inventoryType
+        )}
+      />
+    );
+  };
+
   return (
     <div className="w-90 mx-auto">
       <div className="flex mb-4 justify-center bg-slate-900 rounded-sm">
         <div className="p-2">
           <img
-            src={character.media.assets[0].value}
+            src={character.media?.assets[0].value}
             alt={character.name}
             className="w-24 h-24 rounded-md"
           />
@@ -52,39 +40,39 @@ export default function Armory({ character }) {
             {character && character.name}
           </p>
           <p className="text-center">
-            {character && <>{"<" + character.guild.name + ">"}</>}
+            {character && <>{"<" + character.guild?.name + ">"}</>}
           </p>
         </div>
         <div className="p-2 flex flex-col justify-center">
-          <p>{character && character.average_item_level} ilvl </p>
+          <p>{character && character.average_item_level} Item Level </p>
           <p>{character && character.achievement_points} Achievement Points</p>
         </div>
       </div>
       <div className="flex mx-4 justify-center">
         <div className="flex flex-col">
-          <Item item={character.equipment.equipped_items[0]} />
-          <Item item={character.equipment.equipped_items[1]} />
-          <Item item={character.equipment.equipped_items[2]} />
-          <Item item={character.equipment.equipped_items[3]} />
-          <Item item={character.equipment.equipped_items[13]} />
-          <Item item={character.equipment.equipped_items[17]} />
-          <Item item={character.equipment.equipped_items[7]} />
-          <Item item={character.equipment.equipped_items[16]} />
+          {renderItems("HEAD")}
+          {renderItems("NECK")}
+          {renderItems("SHOULDER")}
+          {renderItems("BACK")}
+          {renderItems("CHEST")}
+          {renderItems("TABARD")}
+          {renderItems("WRIST")}
+          {renderItems("RANGED")}
         </div>
         <div className="flex flex-col">
-          <Item item={character.equipment.equipped_items[8]} />
-          <Item item={character.equipment.equipped_items[4]} />
-          <Item item={character.equipment.equipped_items[5]} />
-          <Item item={character.equipment.equipped_items[6]} />
-          <Item item={character.equipment.equipped_items[9]} />
-          <Item item={character.equipment.equipped_items[10]} />
-          <Item item={character.equipment.equipped_items[11]} />
-          <Item item={character.equipment.equipped_items[12]} />
+          {renderItems("HANDS")}
+          {renderItems("WAIST")}
+          {renderItems("LEGS")}
+          {renderItems("FEET")}
+          {renderItems("FINGER_1")}
+          {renderItems("FINGER_2")}
+          {renderItems("TRINKET_1")}
+          {renderItems("TRINKET_2")}
         </div>
       </div>
       <div className="flex mt-4 justify-center">
-        <Item item={character.equipment.equipped_items[14]} />
-        <Item item={character.equipment.equipped_items[15]} />
+        {renderItems("MAIN_HAND")}
+        {renderItems("OFF_HAND")}
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Tooltip from "./components/tooltip";
 import Armory from "./components/armory";
 import { refreshToken } from "./refreshToken";
 
@@ -33,6 +32,7 @@ export async function fetchCharacter(formData) {
   }
   character.media = await fetchMore(character.media.href);
 
+  console.log(character);
   return character;
 }
 
@@ -58,7 +58,6 @@ export default function API({ formData }) {
       {character ? (
         <div>
           <Armory character={character} />
-          <Tooltip items={character.equipped_items} />
         </div>
       ) : (
         <div>
