@@ -12,7 +12,7 @@ export default function Tooltip({ item }) {
   const qualityColor = qualityColors[item?.quality?.name];
 
   return (
-    <div className="absolute pointer-events-none">
+    <div className="absolute pointer-events-none -translate-y-full">
       {item ? (
         <div
           className={`bg-black bg-opacity-80 p-4 max-w-xs min-w-xs rounded border-2 border-${qualityColor}`}
@@ -22,6 +22,9 @@ export default function Tooltip({ item }) {
           </p>
           <p>{item.slot?.name}</p>
           <p>{item.binding?.name}</p>
+          <p>{item.weapon?.attack_speed.display_string}</p>
+          <p>{item.weapon?.damage.display_string}</p>
+          <p>{item.weapon?.dps.display_string}</p>
           <p>{item.armor?.display.display_string}</p>
           {item.stats?.map((stat, index) => (
             <p key={index}>{stat.display.display_string}</p>
@@ -29,9 +32,6 @@ export default function Tooltip({ item }) {
           {item.spells?.map((spell, index) => (
             <p key={index}>{spell.description}</p>
           ))}
-          <p>{item.weapon?.attack_speed.display_string}</p>
-          <p>{item.weapon?.damage.display_string}</p>
-          <p>{item.weapon?.dps.display_string}</p>
         </div>
       ) : (
         <>loading...</>
