@@ -26,16 +26,16 @@ export default function Armory({ character }) {
   };
 
   return (
-    <div className="w-90 mx-auto">
-      <div className="flex mb-4 justify-center bg-slate-900 rounded-sm">
-        <div className="p-2">
+    <div className="max-w-screen-sm mx-auto mt-4">
+      <div className="flex flex-row mb-4 justify-center bg-slate-800 rounded-md">
+        <div className="basis-1/5">
           <img
             src={character.media?.assets[0].value}
             alt={character.name}
-            className="w-24 h-24 rounded-md"
+            className="w-24 h-24 rounded-md m-2"
           />
         </div>
-        <div className="p-2 flex flex-col justify-center items-center">
+        <div className="p-2 basis-2/5 flex flex-col justify-center items-center">
           <p className={`text-3xl font-bold ${classColor}`}>
             {character && character.name}
           </p>
@@ -43,13 +43,13 @@ export default function Armory({ character }) {
             {character && <>{"<" + character.guild?.name + ">"}</>}
           </p>
         </div>
-        <div className="p-2 flex flex-col justify-center">
+        <div className="p-2 basis-2/5 flex flex-col justify-center">
           <p>{character && character.average_item_level} Item Level </p>
           <p>{character && character.achievement_points} Achievement Points</p>
         </div>
       </div>
-      <div className="flex mx-4 justify-center">
-        <div className="flex flex-col">
+      <div className="flex justify-center">
+        <div className="flex flex-col basis-1/2">
           {renderItems("HEAD")}
           {renderItems("NECK")}
           {renderItems("SHOULDER")}
@@ -59,7 +59,7 @@ export default function Armory({ character }) {
           {renderItems("WRIST")}
           {renderItems("RANGED")}
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col basis-1/2">
           {renderItems("HANDS")}
           {renderItems("WAIST")}
           {renderItems("LEGS")}
@@ -70,9 +70,11 @@ export default function Armory({ character }) {
           {renderItems("TRINKET_2")}
         </div>
       </div>
-      <div className="flex mt-4 justify-center">
-        {renderItems("MAIN_HAND")}
-        {renderItems("OFF_HAND")}
+      <div className="flex mb-7 w-full">
+        <div className="flex flex-col basis-1/2">
+          {renderItems("MAIN_HAND")}
+        </div>
+        <div className="flex flex-col basis-1/2">{renderItems("OFF_HAND")}</div>
       </div>
     </div>
   );

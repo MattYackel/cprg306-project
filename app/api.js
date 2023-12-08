@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Armory from "./components/armory";
-import { refreshToken } from "./refreshToken";
+import { refreshToken } from "./_utils/refreshToken";
 
 export async function fetchCharacter(formData) {
   const accessToken = await refreshToken();
@@ -26,9 +26,18 @@ export async function fetchCharacter(formData) {
     return moreData;
   };
 
-  if (!character || character.code === 404) return null;
+  if (!character) return null;
   if (character.equipment) {
     character.equipment = await fetchMore(character.equipment.href);
+    if (character.equipment.equipped_items)
+      for (const item of character.equipment.equipped_items) {
+        const itemMedia = await fetchMore(item.media.key.href);
+        const [mediaAssets] = itemMedia.assets;
+        const dirtyUrl = mediaAssets.value;
+        const iconName = dirtyUrl.split("/").pop();
+        const iconUrl = `https://wow.zamimg.com/images/wow/icons/large/${iconName}`;
+        item.media = iconUrl;
+      }
   }
   character.media = await fetchMore(character.media.href);
 
@@ -60,11 +69,8 @@ export default function API({ formData }) {
           <Armory character={character} />
         </div>
       ) : (
-        <div>
-          <p>loading...</p>
-          <button className="bg-blue-500" onClick={refreshToken}>
-            Refresh Token
-          </button>
+        <div className="flex justify-center mt-8">
+          <p className="text-3xl font-bold">Loading character...</p>
         </div>
       )}
     </div>

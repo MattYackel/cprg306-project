@@ -1,5 +1,4 @@
-"use client";
-
+// Form.js
 import React from "react";
 import { useState } from "react";
 
@@ -44,73 +43,91 @@ const Form = ({ onSearch }) => {
       <h2 className="text-2xl text-center font-bold">Search for a Character</h2>
       <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto mt-8 p-4 bg-gray-800 rounded-md"
+        className="max-w-screen-sm mx-auto px-3 pt-2 pb-1 bg-slate-800 rounded-md"
       >
-        <label className="block mb-2">
-          <span className="text-orange-400">Region:</span>
-          <select
-            name="region"
-            value={region}
-            onChange={handleRegionChange}
-            className="mt-1 p-2 w-full border rounded-md text-black"
-          >
-            <option value="us">US</option>
-            <option value="eu">EU</option>
-            <option value="kr">KR</option>
-            <option value="tw">TW</option>
-          </select>
-        </label>
+        {/* Second row: Realm and Character Name */}
+        <div className="flex flex-wrap -mx-2">
+          <div className="w-full sm:w-1/2 px-2 mb-2">
+            <label className="block text-md text-orange-500 font-bold mb-1">
+              Character Name:
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleNameChange}
+              className="p-1 w-full bg-slate-700 rounded-md capitalize"
+            />
+          </div>
+          <div className="w-full sm:w-1/2 px-2 mb-2">
+            <label className="block text-md text-orange-500 font-bold mb-1">
+              Realm:
+            </label>
+            <input
+              type="text"
+              name="realm"
+              value={realm}
+              onChange={handleRealmChange}
+              className="p-1 w-full bg-slate-700 rounded-md capitalize"
+            />
+          </div>
+        </div>
 
-        <label className="block mb-2">
-          <span className="text-orange-400">Realm:</span>
-          <input
-            type="text"
-            name="realm"
-            value={realm}
-            onChange={handleRealmChange}
-            className="mt-1 p-2 w-full border rounded-md text-black"
-          />
-        </label>
+        {/* First row: Region, Namespace, and Locale */}
+        <div className="flex flex-wrap -mx-2">
+          <div className="w-full sm:w-1/6 px-2 mb-2">
+            <label className="block text-md text-orange-500 font-bold mb-1">
+              Region:
+            </label>
+            <select
+              name="region"
+              value={region}
+              onChange={handleRegionChange}
+              className="p-1 w-full bg-slate-700 rounded-md"
+            >
+              <option value="us">US</option>
+              <option value="eu">EU</option>
+              <option value="kr">KR</option>
+              <option value="tw">TW</option>
+            </select>
+          </div>
 
-        <label className="block mb-2">
-          <span className="text-orange-400">Character Name:</span>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={handleNameChange}
-            className="mt-1 p-2 w-full border rounded-md text-black"
-          />
-        </label>
+          <div className="w-full sm:w-2/6 px-2 mb-2">
+            <label className="block text-md text-orange-500 font-bold mb-1">
+              Namespace:
+            </label>
+            <select
+              name="namespace"
+              value={namespace}
+              onChange={handleNamespaceChange}
+              className="p-1 w-full bg-slate-700 rounded-md"
+            >
+              <option value={`profile-classic-${region}`}>WOTLK Classic</option>
+              <option value={`profile-classic1x-${region}`}>Classic Era</option>
+            </select>
+          </div>
 
-        <label className="block mb-2">
-          <span className="text-orange-400">Namespace:</span>
-          <input
-            type="text"
-            name="namespace"
-            value={namespace}
-            onChange={handleNamespaceChange}
-            className="mt-1 p-2 w-full border rounded-md text-black"
-          />
-        </label>
-
-        <label className="block mb-2">
-          <span className="text-orange-400">Locale:</span>
-          <input
-            type="text"
-            name="locale"
-            value={locale}
-            onChange={handleLocaleChange}
-            className="mt-1 p-2 w-full border rounded-md text-black"
-          />
-        </label>
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700"
-        >
-          Submit
-        </button>
+          <div className="w-full sm:w-2/6 px-2 mb-2">
+            <label className="block text-md text-orange-500 font-bold mb-1">
+              Locale:
+            </label>
+            <input
+              type="text"
+              name="locale"
+              value={locale}
+              onChange={handleLocaleChange}
+              className="p-1 w-full bg-slate-700 rounded-md"
+            />
+          </div>
+          <div className="w-full sm:w-1/6 px-2 mb-2 flex items-end">
+            <button
+              type="submit"
+              className="w-full bg-slate-700 text-lg text-orange-500 p-3 rounded-md hover:bg-slate-900"
+            >
+              Search
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );
