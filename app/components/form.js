@@ -150,7 +150,7 @@ const Form = ({ onSearch, hideSearch }) => {
         {!hideExamples && <div className="text-lg mx-2 mt-2">Need help?</div>}
         <div className="">
           <button
-            className="w-62 bg-slate-700 text-lg text-orange-500 font-bold py-2 px-4 mt-4 mb-2 rounded-md hover:bg-slate-600"
+            className="w-62 bg-slate-700 text-lg text-orange-500 font-bold py-1 px-4 mt-4 mb-2 rounded-md hover:bg-slate-600"
             onClick={() => setHideExamples(!hideExamples)}
           >
             {hideExamples ? "Hide Examples" : "Show Examples"}

@@ -91,19 +91,15 @@ export default function API({ formData }) {
         <div className="flex justify-center mt-8">
           <p className="text-3xl font-bold">Loading character...</p>
         </div>
-      ) : errorMessage && errorMessage.includes("Error 404") ? (
-        <div className="flex justify-center mt-8">
-          <p className="text-3xl font-bold text-red-500">
-            Error 404: Character not found.
-          </p>
-        </div>
       ) : errorMessage ? (
         <div className="flex justify-center mt-8">
-          <p className="text-3xl font-bold text-red-500">{errorMessage}</p>
+          <p className="text-3xl font-bold text-red-500">
+            Error: {errorMessage}
+          </p>
         </div>
       ) : character ? (
         <div>
-          <Armory character={character} region={formData.region} />
+          <Armory character={character} formData={formData} />
         </div>
       ) : (
         <div className="flex justify-center mt-8">

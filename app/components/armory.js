@@ -1,6 +1,6 @@
 import Item from "./item";
 
-export default function Armory({ character, region }) {
+export default function Armory({ character, formData }) {
   const classColors = {
     "Death Knight": "text-red-600",
     Priest: "text-white",
@@ -26,8 +26,15 @@ export default function Armory({ character, region }) {
   };
 
   const handleCharacterClick = () => {
+    console.log(formData);
+    let namespace = "";
+    if (formData?.namespace.includes("profile-classic-")) {
+      namespace = "classic";
+    } else if (formData.namespace.includes("profile-classic1x-")) {
+      namespace = "vanilla";
+    }
     window.open(
-      `https://classic.warcraftlogs.com/character/${region}/${character.realm.name}/${character.name}`,
+      `https://${namespace}.warcraftlogs.com/character/${formData.region}/${character.realm.name}/${character.name}`,
       "_blank"
     );
   };
