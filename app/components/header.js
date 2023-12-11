@@ -7,11 +7,7 @@ const Header = ({ hideSearch }) => (
           target="_blank"
           className="flex"
         >
-          <img
-            src="/images/GitHub-mark-white.png"
-            alt="GitHub"
-            className="h-6 px-1"
-          />
+          <img src="/images/GitHub_Logo.png" alt=" " className="h-6 px-1" />
           <p className="pl-1">GitHub</p>
         </a>
       </button>
