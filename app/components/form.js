@@ -10,7 +10,7 @@ const Form = ({ onSearch, hideSearch }) => {
   const [namespace, setNamespace] = useState("profile-classic-us");
   const [locale, handleLocaleChange] = useState("en_US");
 
-  const [hideExamples, setHideExamples] = useState(true);
+  const [hideExamples, setHideExamples] = useState(false);
 
   const updateFormData = (formData) => {
     setRegion(formData.region);
@@ -146,13 +146,16 @@ const Form = ({ onSearch, hideSearch }) => {
           </div>
         </div>
       </form>
-      <div className="">
-        <button
-          className="w-62 bg-slate-700 text-lg font-bold text-orange-500 py-2 px-4 mt-4 mb-2 rounded-md hover:bg-slate-600 mx-auto block"
-          onClick={() => setHideExamples(!hideExamples)}
-        >
-          {hideExamples ? "Hide" : "Need help? Show"} Examples
-        </button>
+      <div className="flex items-center justify-center">
+        {!hideExamples && <div className="text-lg mx-2 mt-2">Need help?</div>}
+        <div className="">
+          <button
+            className="w-62 bg-slate-700 text-lg text-orange-500 font-bold py-2 px-4 mt-4 mb-2 rounded-md hover:bg-slate-600"
+            onClick={() => setHideExamples(!hideExamples)}
+          >
+            {hideExamples ? "Hide Examples" : "Show Examples"}
+          </button>
+        </div>
       </div>
       {hideExamples ? <Examples updateFormData={updateFormData} /> : <></>}
     </div>

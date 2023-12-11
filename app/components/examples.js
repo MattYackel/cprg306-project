@@ -49,9 +49,11 @@ const Examples = ({ updateFormData }) => {
 
   return (
     <div className="max-w-screen-sm mx-auto">
-      <h2 className="text-2xl text-center font-bold">Search for a Character</h2>
+      <h2 className="text-2xl text-center font-bold">
+        Search for a Character.
+      </h2>
       <p className="text-center">
-        Can be any character from WOTLK or Classic Era servers.
+        It can be any character from WOTLK or Classic Era servers.
       </p>
       <p className="text-center">
         Here are some example characters to seach for:

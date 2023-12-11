@@ -19,12 +19,17 @@ export async function fetchCharacter(formData, setErrorMessage) {
   const response = await fetch(url);
 
   if (!response.ok) {
-    const errorMessage =
-      response.status === 404
-        ? "Error 404, character not found."
-        : "Error 401, Error fetching character data.";
-    setErrorMessage(errorMessage);
-    throw new Error(errorMessage);
+    const errorMessage = await response.json();
+    if (errorMessage.code === 401) {
+      setErrorMessage(errorMessage.detail);
+      throw new Error(errorMessage.detail);
+    } else if (errorMessage.code === 404) {
+      setErrorMessage(errorMessage.detail);
+      throw new Error(errorMessage.detail);
+    } else {
+      setErrorMessage(errorMessage.error);
+      throw new Error(errorMessage.error);
+    }
   }
 
   const character = await response.json();
