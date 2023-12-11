@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Armory from "./components/armory";
 import { refreshToken } from "./_utils/refreshToken";
 
-export async function fetchCharacter(formData) {
+export async function fetchCharacter(formData, setErrorMessage) {
   const accessToken = await refreshToken();
   if (!accessToken) return null;
 
@@ -17,6 +17,16 @@ export async function fetchCharacter(formData) {
   const url = `https://${region}.api.blizzard.com/profile/wow/character/${realm}/${characterName}?namespace=${namespace}&locale=${locale}&access_token=${accessToken}`;
 
   const response = await fetch(url);
+
+  if (!response.ok) {
+    const errorMessage =
+      response.status === 404
+        ? "Error 404, character not found."
+        : "Error 401, Error fetching character data.";
+    setErrorMessage(errorMessage);
+    throw new Error(errorMessage);
+  }
+
   const character = await response.json();
 
   const fetchMore = async (href) => {
@@ -47,15 +57,23 @@ export async function fetchCharacter(formData) {
 
 export default function API({ formData }) {
   const [character, setCharacter] = useState();
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   async function loadData() {
     try {
-      const character = await fetchCharacter(formData);
+      setLoading(true);
+      const character = await fetchCharacter(formData, setErrorMessage);
       setCharacter(character);
+      setErrorMessage(null);
     } catch (error) {
-      console.log(error);
+      setCharacter(null);
+      setErrorMessage(error.message);
+    } finally {
+      setLoading(false);
     }
   }
+
   useEffect(() => {
     if (formData) {
       loadData();
@@ -64,9 +82,23 @@ export default function API({ formData }) {
 
   return (
     <div>
-      {character ? (
+      {loading ? (
+        <div className="flex justify-center mt-8">
+          <p className="text-3xl font-bold">Loading character...</p>
+        </div>
+      ) : errorMessage && errorMessage.includes("Error 404") ? (
+        <div className="flex justify-center mt-8">
+          <p className="text-3xl font-bold text-red-500">
+            Error 404: Character not found.
+          </p>
+        </div>
+      ) : errorMessage ? (
+        <div className="flex justify-center mt-8">
+          <p className="text-3xl font-bold text-red-500">{errorMessage}</p>
+        </div>
+      ) : character ? (
         <div>
-          <Armory character={character} />
+          <Armory character={character} region={formData.region} />
         </div>
       ) : (
         <div className="flex justify-center mt-8">

@@ -22,7 +22,7 @@ export default function Item({ item }) {
     <div
       onMouseEnter={() => handleMouseEnter(true)}
       onMouseLeave={() => handleMouseLeave(false)}
-      className="bg-slate-800 hover:bg-slate-900 rounded-sm mx-1 mb-1"
+      className="bg-slate-800 hover:bg-slate-600 rounded-sm mx-1 mb-1"
     >
       {showTooltip && <Tooltip item={item} />}
       <a className="flex w-72" href={itemUrl} target="_blank">

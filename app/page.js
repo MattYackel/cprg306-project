@@ -4,29 +4,39 @@ import { useState } from "react";
 
 import API from "./api";
 import Form from "./components/form";
+import Header from "./components/header";
+import Footer from "./components/footer";
 
 export default function Home() {
-  const [formData, setFormData] = useState({
-    region: "us",
-    realm: "atiesh",
-    name: "whisperz",
-    namespace: "profile-classic-us",
-    locale: "en_US",
-  });
+  const [formData, setFormData] = useState({});
+  const [searchPressed, setSearchPressed] = useState(false);
+  const [hideSearch, setHideSearch] = useState(true);
+
   const handleSubmit = (formData) => {
-    console.log(formData);
     setFormData(formData);
+    setSearchPressed(true);
+  };
+
+  const handleHideSearch = () => {
+    if (hideSearch === true) {
+      setHideSearch(false);
+    } else {
+      setHideSearch(true);
+    }
   };
 
   return (
-    <main>
-      <h1 className="text-4xl text-center font-bold mt-6">
-        WoW Classic Armory
-      </h1>
-      <div>
-        <Form onSearch={handleSubmit} />
-        <API formData={formData} />
-      </div>
-    </main>
+    <div>
+      <Header hideSearch={handleHideSearch} />
+      <main>
+        {hideSearch ? (
+          <Form onSearch={handleSubmit} hideSearch={handleHideSearch} />
+        ) : (
+          <></>
+        )}
+        {searchPressed ? <API formData={formData} /> : <></>}
+      </main>
+      <Footer />
+    </div>
   );
 }

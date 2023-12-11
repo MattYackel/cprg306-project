@@ -1,6 +1,6 @@
 import Item from "./item";
 
-export default function Armory({ character }) {
+export default function Armory({ character, region }) {
   const classColors = {
     "Death Knight": "text-red-600",
     Priest: "text-white",
@@ -25,10 +25,20 @@ export default function Armory({ character }) {
     );
   };
 
+  const handleCharacterClick = () => {
+    window.open(
+      `https://classic.warcraftlogs.com/character/${region}/${character.realm.name}/${character.name}`,
+      "_blank"
+    );
+  };
+
   return (
-    <div className="max-w-screen-sm mx-auto mt-4">
-      <div className="flex flex-row mb-4 justify-center bg-slate-800 rounded-md">
-        <div className="basis-1/5">
+    <div className="max-w-screen-sm mx-auto mt-4 mb-24">
+      <div
+        className="flex flex-row mb-4 justify-center bg-slate-800 rounded-md hover:bg-slate-600 hover:cursor-pointer"
+        onClick={handleCharacterClick}
+      >
+        <div className="basis-1/5 flex-shrink-0">
           <img
             src={character.media?.assets[0].value}
             alt={character.name}
@@ -70,7 +80,7 @@ export default function Armory({ character }) {
           {renderItems("TRINKET_2")}
         </div>
       </div>
-      <div className="flex mb-7 w-full">
+      <div className="flex justify-center mb-7 w-full">
         <div className="flex flex-col basis-1/2">
           {renderItems("MAIN_HAND")}
         </div>

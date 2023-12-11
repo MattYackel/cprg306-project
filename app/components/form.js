@@ -1,51 +1,63 @@
 // Form.js
 import React from "react";
 import { useState } from "react";
+import Examples from "./examples";
 
-const Form = ({ onSearch }) => {
+const Form = ({ onSearch, hideSearch }) => {
   const [region, setRegion] = useState("us");
-  const [realm, setRealm] = useState("atiesh");
-  const [name, setName] = useState("whisperz");
+  const [realm, setRealm] = useState("");
+  const [name, setName] = useState("");
   const [namespace, setNamespace] = useState("profile-classic-us");
-  const [locale, setLocale] = useState("en_US");
+  const [locale, handleLocaleChange] = useState("en_US");
+
+  const [hideExamples, setHideExamples] = useState(true);
+
+  const updateFormData = (formData) => {
+    setRegion(formData.region);
+    setRealm(formData.realm);
+    setName(formData.name);
+    setNamespace(formData.namespace);
+    handleLocaleChange(formData.locale);
+  };
 
   const handleRegionChange = (event) => {
     setRegion(event.target.value);
   };
+
   const handleRealmChange = (event) => {
-    setRealm(event.target.value);
+    setRealm(event.target.value.toLowerCase());
   };
+
   const handleNameChange = (event) => {
-    setName(event.target.value);
+    setName(event.target.value.toLowerCase());
   };
+
   const handleNamespaceChange = (event) => {
     setNamespace(event.target.value);
-  };
-  const handleLocaleChange = (event) => {
-    setLocale(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const character = {
+    const formData = {
       region,
       realm,
       name,
       namespace,
       locale,
     };
-    onSearch(character);
+
+    hideSearch();
+    setHideExamples(false);
+    onSearch(formData);
   };
 
   return (
     <div>
-      <h2 className="text-2xl text-center font-bold">Search for a Character</h2>
       <form
         onSubmit={handleSubmit}
         className="max-w-screen-sm mx-auto px-3 pt-2 pb-1 bg-slate-800 rounded-md"
       >
-        {/* Second row: Realm and Character Name */}
         <div className="flex flex-wrap -mx-2">
           <div className="w-full sm:w-1/2 px-2 mb-2">
             <label className="block text-md text-orange-500 font-bold mb-1">
@@ -55,8 +67,9 @@ const Form = ({ onSearch }) => {
               type="text"
               name="name"
               value={name}
+              required
               onChange={handleNameChange}
-              className="p-1 w-full bg-slate-700 rounded-md capitalize"
+              className="p-1 w-full bg-slate-700 hover:bg-slate-600 rounded-md capitalize"
             />
           </div>
           <div className="w-full sm:w-1/2 px-2 mb-2">
@@ -67,13 +80,13 @@ const Form = ({ onSearch }) => {
               type="text"
               name="realm"
               value={realm}
+              required
               onChange={handleRealmChange}
-              className="p-1 w-full bg-slate-700 rounded-md capitalize"
+              className="p-1 w-full bg-slate-700 hover:bg-slate-600 rounded-md capitalize"
             />
           </div>
         </div>
 
-        {/* First row: Region, Namespace, and Locale */}
         <div className="flex flex-wrap -mx-2">
           <div className="w-full sm:w-1/6 px-2 mb-2">
             <label className="block text-md text-orange-500 font-bold mb-1">
@@ -82,8 +95,9 @@ const Form = ({ onSearch }) => {
             <select
               name="region"
               value={region}
+              required
               onChange={handleRegionChange}
-              className="p-1 w-full bg-slate-700 rounded-md"
+              className="p-1 w-full bg-slate-700 hover:bg-slate-600 rounded-md"
             >
               <option value="us">US</option>
               <option value="eu">EU</option>
@@ -99,8 +113,9 @@ const Form = ({ onSearch }) => {
             <select
               name="namespace"
               value={namespace}
+              required
               onChange={handleNamespaceChange}
-              className="p-1 w-full bg-slate-700 rounded-md"
+              className="p-1 w-full bg-slate-700 hover:bg-slate-600 rounded-md"
             >
               <option value={`profile-classic-${region}`}>WOTLK Classic</option>
               <option value={`profile-classic1x-${region}`}>Classic Era</option>
@@ -115,20 +130,31 @@ const Form = ({ onSearch }) => {
               type="text"
               name="locale"
               value={locale}
+              required
               onChange={handleLocaleChange}
-              className="p-1 w-full bg-slate-700 rounded-md"
+              readOnly
+              className="p-1 w-full bg-slate-700 rounded-md text-gray-400 cursor-not-allowed"
             />
           </div>
           <div className="w-full sm:w-1/6 px-2 mb-2 flex items-end">
             <button
               type="submit"
-              className="w-full bg-slate-700 text-lg text-orange-500 p-3 rounded-md hover:bg-slate-900"
+              className="w-full bg-slate-700 text-lg text-orange-500 p-3 rounded-md hover:bg-slate-600"
             >
               Search
             </button>
           </div>
         </div>
       </form>
+      <div className="">
+        <button
+          className="w-62 bg-slate-700 text-lg font-bold text-orange-500 py-2 px-4 mt-4 mb-2 rounded-md hover:bg-slate-600 mx-auto block"
+          onClick={() => setHideExamples(!hideExamples)}
+        >
+          {hideExamples ? "Hide" : "Need help? Show"} Examples
+        </button>
+      </div>
+      {hideExamples ? <Examples updateFormData={updateFormData} /> : <></>}
     </div>
   );
 };
