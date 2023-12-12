@@ -16,7 +16,7 @@ export default function Tooltip({ item }) {
       {item ? (
         <div
           className={
-            "bg-black bg-opacity-80 p-4 max-w-xs min-w-xs rounded border-2 border-" +
+            "bg-black bg-opacity-90 p-4 max-w-xs min-w-xs text-white rounded border-2 border-" +
             qualityColor
           }
         >
@@ -37,7 +37,7 @@ export default function Tooltip({ item }) {
           ))}
         </div>
       ) : (
-        <>loading...</>
+        <div className="text-white">loading...</div>
       )}
     </div>
   );

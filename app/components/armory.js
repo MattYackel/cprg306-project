@@ -26,7 +26,6 @@ export default function Armory({ character, formData }) {
   };
 
   const handleCharacterClick = () => {
-    console.log(formData);
     let namespace = "";
     if (formData?.namespace.includes("profile-classic-")) {
       namespace = "classic";
@@ -56,11 +55,11 @@ export default function Armory({ character, formData }) {
           <p className={`text-3xl font-bold ${classColor}`}>
             {character && character.name}
           </p>
-          <p className="text-center">
+          <p className="text-center text-white">
             {character && <>{"<" + character.guild?.name + ">"}</>}
           </p>
         </div>
-        <div className="p-2 basis-2/5 flex flex-col justify-center">
+        <div className="p-2 basis-2/5 flex flex-col text-white justify-center">
           <p>{character && character.average_item_level} Item Level </p>
           <p>{character && character.achievement_points} Achievement Points</p>
         </div>

@@ -69,7 +69,7 @@ const Form = ({ onSearch, hideSearch }) => {
               value={name}
               required
               onChange={handleNameChange}
-              className="p-1 w-full bg-slate-700 hover:bg-slate-600 rounded-md capitalize"
+              className="p-1 w-full bg-slate-700 hover:bg-slate-600 text-white rounded-md capitalize"
             />
           </div>
           <div className="w-full sm:w-1/2 px-2 mb-2">
@@ -82,7 +82,7 @@ const Form = ({ onSearch, hideSearch }) => {
               value={realm}
               required
               onChange={handleRealmChange}
-              className="p-1 w-full bg-slate-700 hover:bg-slate-600 rounded-md capitalize"
+              className="p-1 w-full bg-slate-700 hover:bg-slate-600 text-white rounded-md capitalize"
             />
           </div>
         </div>
@@ -97,7 +97,7 @@ const Form = ({ onSearch, hideSearch }) => {
               value={region}
               required
               onChange={handleRegionChange}
-              className="p-1 w-full bg-slate-700 hover:bg-slate-600 rounded-md"
+              className="p-1 w-full bg-slate-700 hover:bg-slate-600 text-white rounded-md"
             >
               <option value="us">US</option>
               <option value="eu">EU</option>
@@ -115,7 +115,7 @@ const Form = ({ onSearch, hideSearch }) => {
               value={namespace}
               required
               onChange={handleNamespaceChange}
-              className="p-1 w-full bg-slate-700 hover:bg-slate-600 rounded-md"
+              className="p-1 w-full bg-slate-700 hover:bg-slate-600 text-white rounded-md"
             >
               <option value={`profile-classic-${region}`}>WOTLK Classic</option>
               <option value={`profile-classic1x-${region}`}>Classic Era</option>
@@ -147,7 +147,9 @@ const Form = ({ onSearch, hideSearch }) => {
         </div>
       </form>
       <div className="flex items-center justify-center">
-        {!hideExamples && <div className="text-lg mx-2 mt-2">Need help?</div>}
+        {!hideExamples && (
+          <div className="text-lg mx-2 mt-2 text-white">Need help?</div>
+        )}
         <div className="">
           <button
             className="w-62 bg-slate-700 text-lg text-orange-500 font-bold py-1 px-4 mt-4 mb-2 rounded-md hover:bg-slate-600"

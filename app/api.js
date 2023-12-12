@@ -89,7 +89,7 @@ export default function API({ formData }) {
     <div>
       {loading ? (
         <div className="flex justify-center mt-8">
-          <p className="text-3xl font-bold">Loading character...</p>
+          <p className="text-3xl font-bold text-white">Loading character...</p>
         </div>
       ) : errorMessage ? (
         <div className="flex justify-center mt-8">
@@ -103,7 +103,7 @@ export default function API({ formData }) {
         </div>
       ) : (
         <div className="flex justify-center mt-8">
-          <p className="text-3xl font-bold">Loading character...</p>
+          <p className="text-3xl font-bold text-white">Character not found.</p>
         </div>
       )}
     </div>

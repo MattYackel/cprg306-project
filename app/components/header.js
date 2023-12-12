@@ -8,11 +8,11 @@ const Header = ({ hideSearch }) => (
           className="flex"
         >
           <img src="/images/GitHub_Logo.png" alt=" " className="h-6 px-1" />
-          <p className="pl-1">GitHub</p>
+          <p className="pl-1 text-white">GitHub</p>
         </a>
       </button>
 
-      <h1 className="min-w-72 text-3xl text-center font-bold">
+      <h1 className="min-w-72 text-3xl text-center text-white font-bold">
         WoW Classic Armory
       </h1>
       <button
@@ -24,7 +24,7 @@ const Header = ({ hideSearch }) => (
           alt="Search"
           className="h-6 px-2 pt-1"
         />
-        <p>Search</p>
+        <p className="text-white">Search</p>
       </button>
     </div>
   </header>

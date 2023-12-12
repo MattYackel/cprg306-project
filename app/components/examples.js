@@ -49,13 +49,13 @@ const Examples = ({ updateFormData }) => {
 
   return (
     <div className="max-w-screen-sm mx-auto">
-      <h2 className="text-2xl text-center font-bold">
+      <h2 className="text-2xl text-center text-white font-bold">
         Search for a Character.
       </h2>
-      <p className="text-center">
+      <p className="text-center text-white">
         It can be any character from WOTLK or Classic Era servers.
       </p>
-      <p className="text-center">
+      <p className="text-center text-white">
         Here are some example characters to seach for:
       </p>
       <div className="flex flex-wrap justify-center">
@@ -65,15 +65,15 @@ const Examples = ({ updateFormData }) => {
             className="grid grid-cols-2 w-72 bg-slate-700 rounded-md p-2 m-1 cursor-pointer hover:bg-slate-600"
             onClick={handleExampleClick(example)}
           >
-            <p className="text-right">Character Name:&nbsp;</p>
+            <p className="text-right text-white">Character Name:&nbsp;</p>
             <p className="text-orange-500 font-bold">{example.name}</p>
-            <p className="text-right">Realm:&nbsp;</p>
+            <p className="text-right text-white">Realm:&nbsp;</p>
             <p className="text-orange-500 font-bold">{example.realm}</p>
-            <p className="text-right">Region:&nbsp;</p>
+            <p className="text-right text-white">Region:&nbsp;</p>
             <p className="text-orange-500 font-bold">{example.region}</p>
-            <p className="text-right">Namespace:&nbsp;</p>
+            <p className="text-right text-white">Namespace:&nbsp;</p>
             <p className="text-orange-500 font-bold">{example.namespace}</p>
-            <p className="text-right">Locale:&nbsp;</p>
+            <p className="text-right text-white">Locale:&nbsp;</p>
             <p className="text-orange-500 font-bold">{example.locale}</p>
           </div>
         ))}

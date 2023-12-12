@@ -31,7 +31,7 @@ export default function Item({ item }) {
           src={item.media}
           alt={item.inventory_type.name}
         />
-        <p className="mt-1 mx-2">{item.name}</p>
+        <p className="mt-1 mx-2 text-white">{item.name}</p>
       </a>
     </div>
   );

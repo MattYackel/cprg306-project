@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-black">
       <Header hideSearch={handleHideSearch} />
       <main>
         {hideSearch ? (
